@@ -1,0 +1,72 @@
+/** SavingsAccountRunner.java
+ * 
+ * Author: Borris Gefferson Happi kouganou
+ * Class : Java
+ * 
+ *  Des
+ * 
+ */
+
+import java.util.Scanner;
+
+public class SavingsAccountRunner {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int choice;
+		int id;
+		
+		System.out.println("Welcome to your Savings Account Apps!");
+		System.out.print("Enter your account number: ");
+		id = input.nextInt();
+		System.out.print("Enter your initial balance: ");
+		double balance = input.nextDouble();
+		
+		SavingsAccount user1 = new SavingsAccount(id, balance);
+		
+		System.out.print("Enter your annual interest rate: ");
+		double annualIntRate = input.nextDouble();
+		System.out.println();
+		
+		user1.setAnnualIntRate(annualIntRate);
+		
+		do {
+		System.out.println("==============================");
+		System.out.println("=        OPTIONS BELOW       =");
+		System.out.println("==============================");
+		
+		System.out.println("1. Deposit");
+		System.out.println("2. View Weekly Interest Rate");
+		System.out.println("3. View Account Details");
+		System.out.println("4. Exit");
+		
+		System.out.println("Enter your selection");
+		choice = input.nextInt();
+		
+		if (choice == 1) {
+			System.out.print("Enter your deposit amount: ");
+			double deposit = input.nextDouble();
+			if (deposit >= 0) {
+				user1.deposit(deposit);
+				System.out.println("New Balance: $" + user1.getBalance());
+			}
+		}
+		else if (choice == 2) {
+			System.out.printf("Your Weekly Interset Amount is $%5.2f\n" ,user1.getWeeklyIntRate());
+		}
+		else if (choice == 3) {
+			System.out.println("Account ID: " + user1.getId());
+			System.out.println("Account Creation Date/Time: " + user1.getDateEstablished());
+			System.out.println("Balance: $" + user1.getBalance());
+			System.out.printf("Weekly Interest Rate Amount: $%5.2f\n" , user1.getWeeklyIntRate());
+		}
+		else if (choice < 1 || choice > 4) {
+			System.out.println("INVALID SELECTION - TRY AGAIN!");
+			choice = input.nextInt();
+			}
+		
+		}while (choice !=4);
+		System.out.print("Thank You - Goodbye!");
+		
+	}
+}
